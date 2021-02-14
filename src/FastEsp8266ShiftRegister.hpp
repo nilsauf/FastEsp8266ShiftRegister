@@ -12,14 +12,10 @@ class FastEsp8266ShiftRegister
 public:
     FastEsp8266ShiftRegister(const uint8_t dataPin, const uint8_t clockPin, const uint8_t latchPin, const uint8_t shiftRegisterCount = 1)
     {
-        this->_dataPinMask = (uint16_t)1 << dataPin;
-        this->_clockPinMask = (uint16_t)1 << clockPin;
-        this->_latchPinMask = (uint16_t)1 << latchPin;
+        this->_dataPinMask = digitalPinToBitMask(dataPin);
+        this->_clockPinMask = digitalPinToBitMask(clockPin);
+        this->_latchPinMask = digitalPinToBitMask(latchPin);
         this->_shiftRegisterCount = shiftRegisterCount;
-
-        this->_dataPin = dataPin;
-        this->_clockPin = clockPin;
-        this->_latchPin = latchPin;
 
         pinMode(dataPin, OUTPUT);
         pinMode(clockPin, OUTPUT);
@@ -51,25 +47,11 @@ public:
         SET_PERI_REG_MASK(0x60000308, this->_latchPinMask);
     }
 
-    uint8_t *getAll()
-    {
-        uint8_t dataIn[this->_shiftRegisterCount];
-        for (uint8_t valueIndex = 0; valueIndex < this->_shiftRegisterCount; valueIndex++)
-        {
-            dataIn[valueIndex] = shiftIn(this->_dataPin, this->_clockPin, MSBFIRST);
-        }
-        return dataIn;
-    }
-
 private:
     uint16_t _dataPinMask;
     uint16_t _clockPinMask;
     uint16_t _latchPinMask;
     uint8_t _shiftRegisterCount;
-
-    uint8_t _dataPin;
-    uint8_t _clockPin;
-    uint8_t _latchPin;
 };
 
 #endif
