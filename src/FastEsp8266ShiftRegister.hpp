@@ -47,6 +47,11 @@ public:
         SET_PERI_REG_MASK(0x60000308, this->_latchPinMask);
     }
 
+    uint8_t GetRegisterCount()
+    {
+        return this->_shiftRegisterCount;
+    }
+
 private:
     uint16_t _dataPinMask;
     uint16_t _clockPinMask;
