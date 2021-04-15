@@ -45,9 +45,6 @@ jobs:
       - name: Get tag
         id: tag
         uses: dawidd6/action-get-tag@v1
-      
-      - name: Echo Github_Ref
-        run: echo "::debug::${{steps.tag.outputs.tag}}"
           
       - name: Set new Version
         uses: mingjun97/file-regex-replace@v1
@@ -56,13 +53,5 @@ jobs:
          replacement: '"version": "${{steps.tag.outputs.tag}}",'
          include: 'library.json'
           
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.3
-        with:
-          # Artifact name
-          name: library.json # optional, default is artifact
-          # A file, directory or wildcard pattern that describes what to upload
-          path: library.json
-          
-      #- name: Publish Package
-      #  run: pio package publish --owner nilsauf --notify
+      - name: Publish Package
+        run: pio package publish --owner nilsauf --notify
