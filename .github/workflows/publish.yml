@@ -50,6 +50,7 @@ jobs:
         with:
          regex: '"version": "VERSION_TAG",'
          replacement: '"version": "0.2.2",'
+         include: 'library.json'
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
