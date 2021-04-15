@@ -53,8 +53,8 @@ jobs:
          replacement: '"version": "${{ steps.tag.outputs.tag }}",'
          include: 'library.json'
           
-      - name: Login
-        run: pio account login -u ${{ secrets.PLATFORMIO_USERNAME }} -p ${{ secrets.PLATFORMIO_TOKEN }}
+      - name: Set Platform IO Login Token
+        run: echo " PLATFORMIO_AUTH_TOKEN=${{ secrets.PLATFORMIO_TOKEN }}" >> $GITHUB_ENV
           
       - name: Publish Package
         run: pio package publish --owner ${{ secrets.PLATFORMIO_USERNAME }} --notify
