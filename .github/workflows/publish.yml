@@ -49,7 +49,7 @@ jobs:
         uses: mingjun97/file-regex-replace@v1
         with:
          regex: '"version": "VERSION_TAG",'
-         replacement: '"version": "0.2.2",'
+         replacement: '"version": "$GITHUB_REF",'
          include: 'library.json'
           
       - name: Upload a Build Artifact
