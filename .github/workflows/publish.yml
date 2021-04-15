@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  puglish:
+  publish:
     runs-on: ubuntu-latest
     
     steps:
@@ -53,7 +53,7 @@ jobs:
         run: echo "PLATFORMIO_AUTH_TOKEN=${{ secrets.PLATFORMIO_TOKEN }}" >> $GITHUB_ENV
         
       - name: Login
-        run: pio account login
+        run: pio account login -u ${{ secrets.PLATFORMIO_USERNAME }}
           
       - name: Publish Package
         run: pio package publish --owner ${{ secrets.PLATFORMIO_USERNAME }} --notify
