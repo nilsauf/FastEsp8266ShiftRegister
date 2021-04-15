@@ -42,14 +42,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install --upgrade platformio
           
+      - name: Echo Github_Ref
+        run: echo "::debug::${{ GITHUB_REF }}"
+          
       - name: Set new Version
         uses: BlobDevelopment/copy-and-replace-tokens@v1
         with:
          source: 'library.json.template'
          target: 'library.json'
         env:
-          VERSION: $GITHUB_REF
+          VERSION: ${{ GITHUB_REF }}
           
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.3
+        with:
+          # Artifact name
+          name: library.json # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: library.json
+      
       - name: Pack Package
         run: pio package pack -o ${{ github.workspace }}/FastEsp8266ShiftRegister.tar.gz
         
