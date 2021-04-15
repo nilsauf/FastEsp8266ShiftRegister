@@ -50,10 +50,11 @@ jobs:
          include: 'library.json'
           
       - name: Set Platform IO Login Token
-        run: echo "PLATFORMIO_AUTH_TOKEN=${{ secrets.PLATFORMIO_TOKEN }}" >> $GITHUB_ENV
-        
-      - name: Login
-        run: pio account login -u ${{ secrets.PLATFORMIO_USERNAME }}
+      #  run: echo "PLATFORMIO_AUTH_TOKEN=${{ secrets.PLATFORMIO_TOKEN }}" >> $GITHUB_ENV
+        uses: myci-actions/export-env-var@1
+        with:
+          name: PLATFORMIO_AUTH_TOKEN
+          value: ${{ secrets.PLATFORMIO_TOKEN }}
           
       - name: Publish Package
         run: pio package publish --owner ${{ secrets.PLATFORMIO_USERNAME }} --notify
