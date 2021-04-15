@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Pack and Publish
+name: Publish
 
 # Controls when the action will run. 
 on:
@@ -10,14 +10,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  puglish:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    
     steps:
       - uses: actions/checkout@v2
       
@@ -54,7 +50,10 @@ jobs:
          include: 'library.json'
           
       - name: Set Platform IO Login Token
-        run: echo " PLATFORMIO_AUTH_TOKEN=${{ secrets.PLATFORMIO_TOKEN }}" >> $GITHUB_ENV
+        run: echo "PLATFORMIO_AUTH_TOKEN=${{ secrets.PLATFORMIO_TOKEN }}" >> $GITHUB_ENV
+        
+      - name: Login
+        run: pio account login
           
       - name: Publish Package
         run: pio package publish --owner ${{ secrets.PLATFORMIO_USERNAME }} --notify
