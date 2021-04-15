@@ -50,8 +50,11 @@ jobs:
         uses: mingjun97/file-regex-replace@v1
         with:
          regex: '"version": "VERSION_TAG",'
-         replacement: '"version": "${{steps.tag.outputs.tag}}",'
+         replacement: '"version": "${{ steps.tag.outputs.tag }}",'
          include: 'library.json'
           
+      - name: Login
+        run: pio account login -u ${{ secrets.PLATFORMIO_USERNAME }} -p ${{ secrets.PLATFORMIO_TOKEN }}
+          
       - name: Publish Package
-        run: pio package publish --owner nilsauf --notify
+        run: pio package publish --owner ${{ secrets.PLATFORMIO_USERNAME }} --notify
