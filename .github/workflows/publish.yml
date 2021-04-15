@@ -46,12 +46,10 @@ jobs:
         run: echo "::debug::$GITHUB_REF"
           
       - name: Set new Version
-        uses: BlobDevelopment/copy-and-replace-tokens@v1
+        uses: mingjun97/file-regex-replace@v1
         with:
-         source: 'library.json.template'
-         target: 'library.json'
-        env:
-          VERSION: "0.2.2"
+         regex: '"version": "VERSION_TAG",'
+         replacement: '"version": "0.2.2",'
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
