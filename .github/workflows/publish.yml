@@ -60,16 +60,6 @@ jobs:
           name: library.json # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
           path: library.json
-      
-      - name: Pack Package
-        run: pio package pack -o ${{ github.workspace }}/FastEsp8266ShiftRegister.tar.gz
-        
-      - name: Upload Pack to Release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/FastEsp8266ShiftRegister.tar.gz
-          tag: $GITHUB_REF
           
-      - name: Publish Package
-        run: pio package publish --owner nilsauf --notify
+      #- name: Publish Package
+      #  run: pio package publish --owner nilsauf --notify
