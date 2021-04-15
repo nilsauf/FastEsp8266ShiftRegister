@@ -43,7 +43,7 @@ jobs:
           pip install --upgrade platformio
           
       - name: Echo Github_Ref
-        run: echo "::debug::${{ GITHUB_REF }}"
+        run: echo "::debug::$GITHUB_REF"
           
       - name: Set new Version
         uses: BlobDevelopment/copy-and-replace-tokens@v1
@@ -51,7 +51,7 @@ jobs:
          source: 'library.json.template'
          target: 'library.json'
         env:
-          VERSION: ${{ GITHUB_REF }}
+          VERSION: $GITHUB_REF
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
