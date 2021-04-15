@@ -1,14 +1,8 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Publish
 
-# Controls when the action will run. 
 on:
   release:
     types: [published]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 jobs:
   publish:
@@ -39,18 +33,17 @@ jobs:
           pip install --upgrade platformio
       
       - name: Get tag
-        id: tag
+        id: gettag
         uses: dawidd6/action-get-tag@v1
           
       - name: Set new Version
         uses: mingjun97/file-regex-replace@v1
         with:
          regex: '"version": "VERSION_TAG",'
-         replacement: '"version": "${{ steps.tag.outputs.tag }}",'
+         replacement: '"version": "${{ steps.gettag.outputs.tag }}",'
          include: 'library.json'
           
       - name: Set Platform IO Login Token
-      #  run: echo "PLATFORMIO_AUTH_TOKEN=${{ secrets.PLATFORMIO_TOKEN }}" >> $GITHUB_ENV
         uses: myci-actions/export-env-var@1
         with:
           name: PLATFORMIO_AUTH_TOKEN
