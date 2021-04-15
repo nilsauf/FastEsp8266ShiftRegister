@@ -41,15 +41,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade platformio
-          
+      
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+      
       - name: Echo Github_Ref
-        run: echo "::debug::$GITHUB_REF"
+        run: echo "::debug::${{steps.tag.outputs.tag}}"
           
       - name: Set new Version
         uses: mingjun97/file-regex-replace@v1
         with:
          regex: '"version": "VERSION_TAG",'
-         replacement: '"version": "$GITHUB_REF",'
+         replacement: '"version": "${{steps.tag.outputs.tag}}",'
          include: 'library.json'
           
       - name: Upload a Build Artifact
