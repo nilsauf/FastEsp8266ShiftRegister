@@ -51,7 +51,7 @@ jobs:
          source: 'library.json.template'
          target: 'library.json'
         env:
-          {VERSION}: $GITHUB_REF
+          VERSION: "0.2.2"
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
