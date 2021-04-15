@@ -1,6 +1,6 @@
 {
     "name": "FastEsp8266ShiftRegister",
-    "version": "{VERSION}",
+    "version": "VERSION_TAG",
     "description": "A fast shift register library for the ESP8266 controller",
     "keywords": "shift, register, fast, esp8266, 8266, esp",
     "repository": {
