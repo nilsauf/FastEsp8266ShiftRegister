@@ -41,9 +41,9 @@ public:
      */
     void shiftAllOutAndUpdate(uint8_t *newValues)
     {
-        for (uint8_t shiftRegisterIndex = this->_shiftRegisterCount - 1; shiftRegisterIndex >= 0; shiftRegisterIndex--)
+        for (uint8_t shiftRegisterIndex = this->_shiftRegisterCount; shiftRegisterIndex > 0; shiftRegisterIndex--)
         {
-            this->shiftOut(newValues[shiftRegisterIndex]);
+            this->shiftOut(newValues[shiftRegisterIndex - 1]);
         }
         this->update();
     }
