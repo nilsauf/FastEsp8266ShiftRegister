@@ -10,8 +10,6 @@ jobs:
     
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.head_ref }}
       
       - name: Cache pip
         uses: actions/cache@v2
@@ -58,3 +56,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Set new Version -> ${{ steps.gettag.outputs.tag }}
+          branch: master
